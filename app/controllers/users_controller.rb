@@ -16,23 +16,27 @@ class UsersController < ApplicationController
       if @user.save
         render json: @user, status: 201
       else
-        render json: { erors: @user.errors.full_messages }, status: 503
+        render json: { errors: @user.errors.full_messages }, status: 503
       end
     end
 
     def update
-      unless @user.update(user_params)
-        render json: {erors: @user.errors.full messages}, status: 503
+      if @user.update(user_params)
+        render json: @user, status: 200
+      else
+        render json: { errors: @user.errors.full_messages }, status: 503
       end
     end
 
     def destroy
-      @user.destroy
+      if @user.destroy
+        render json: { message: "User deleted successfully" }
+      end
     end
 
     private
       def user_params
-        params.permit(:username, :email, :password)
+        params.permit(:user_name, :email, :password, :name)
       end
 
       def find_user
