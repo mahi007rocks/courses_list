@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+@user = User.create name: 'mahesh', user_name: 'heyyy', email: 'hey@io.in', password: '123456'
+
+%w[art science maths].each do |course |
+  Course.create name: course, user_id: @user.id
+end

@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_action :find_course, only: [:show, :update, :destroy]
 
     def index
-      @courses = Course.all
+      @courses = Course.where(user_id: @current_user.id).as_json
       render json: @courses, status: 200
     end
 
